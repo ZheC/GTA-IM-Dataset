@@ -10,7 +10,7 @@ We introduce the GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene 
 
 ## Obtain the Dataset
 
-To obtain the Dataset, so please send an email to [Zhe Cao](https://people.eecs.berkeley.edu/~zhecao/) (with the title "GTA-IM Dataset Download") stating:
+To obtain the Dataset, please send an email to [Zhe Cao](https://people.eecs.berkeley.edu/~zhecao/) (with the title "GTA-IM Dataset Download") stating:
 
 - Your name, title and affilation
 
