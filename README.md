@@ -101,10 +101,10 @@ LIMBS = [
 		python vis_2dpose.py -pa PATH_TO_DATA/ 
         ````
 
-- `write_video.py`: create a RGB video from the sequence.
+- `write_video.py`: create a RGB video from the color images.
     - usage example: 
         ````bash
-		python write_video.py -pa PATH_TO_DATA/ 
+		python write_video.py -pa PATH_TO_DATA/ -s DOWN_SCALE_RATIO -fr FRAME_RATE
         ````
 
 ## Important Note
