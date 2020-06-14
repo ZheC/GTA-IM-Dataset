@@ -44,18 +44,23 @@ def single_vis(args):
                 p2 = (int(keypoint[i1, 0]), int(keypoint[i1, 1]))
                 frame = cv2.line(frame, tuple(p1), tuple(p2), (0, 255, 0), 20)
 
-            plt.figure(figsize=(32, 9))
-            plt.subplot(121)
-            plt.imshow(frame[:, :, ::-1])
-            plt.axis('off')
-            plt.subplot(122)
-            # visualize the disparity
-            plt.imshow(100.0 / depthmap[:, :, 0], cmap='plasma')
-            plt.axis('off')
+
+            fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(16, 9), sharey=True)
+            ax1.imshow(frame[:, :, ::-1])
+            ax1.axis('off')
+            # visaulize the disparity
+            ax2.imshow(100.0 / depthmap[:, :, 0], cmap='plasma')
+            ax2.axis('off')
+            # tight figure
+            plt.subplots_adjust(top = 1, bottom = 0, right = 1, left = 0, 
+            hspace = 0, wspace = 0)
+            plt.margins(0,0)
+            plt.gca().xaxis.set_major_locator(plt.NullLocator())
+            plt.gca().yaxis.set_major_locator(plt.NullLocator())
             plt.savefig(
-                os.path.join(args.outpath, str(idx) + '_vis.jpg'),
+                os.path.join(args.outpath, str(idx) + '_vis.jpg'), 
                 bbox_inches='tight',
-            )
+                pad_inches=0)
             plt.close()
 
 

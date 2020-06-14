@@ -7,12 +7,12 @@
 </div>
 
 <br>
-This repository maintains our GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collect HD RGB-D image seuqences of 3D human motion from realistic game engine. The dataset has clean 3D human pose and camera pose annoations, and large diversity in human appearances, indoor environments, camera views, and human activities. More information can be found in our paper:
 
-**Long-term Human Motion Prediction with Scene Context** [PDF](https://people.eecs.berkeley.edu/~zhecao/hmp/preprint.pdf)
+**Long-term Human Motion Prediction with Scene Context**
 <br>
 [Zhe Cao](http://people.eecs.berkeley.edu/~zhecao/), [Hang Gao](http://people.eecs.berkeley.edu/~hangg/), [Karttikeya Mangalam](https://karttikeya.github.io/), [Qi-Zhi Cai](https://scholar.google.com/citations?user=oyh-YNwAAAAJ&hl=en), [Minh Vo](https://minhpvo.github.io/), [Jitendra Malik](https://people.eecs.berkeley.edu/~malik/). <br>
 
+This repository maintains our GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collect HD RGB-D image seuqences of 3D human motion from realistic game engine. The dataset has clean 3D human pose and camera pose annoations, and large diversity in human appearances, indoor environments, camera views, and human activities.
 
 **Table of contents**<br>
 1. [A demo for playing with our dataset.](#demo)<br>
@@ -37,7 +37,6 @@ $ python vis_video.py -pa demo -fr 15
 ```
 
 You should be able to find a created `demo/vis/` directory with a `video.mp4`:
-[![Watch the video](assets/vis_video.jpg)](assets/vis_video.mp4)
 
 ### (2) 2D skeleton & depth map
 ```bash
@@ -57,11 +56,11 @@ $ python vis_skeleton_pcd.py -h
 usage: vis_skeleton_pcd.py [-h] [-pa PATH] [-f FRAME] [-fw FUSION_WINDOW]
 
 # now visualize demo 3d skeleton and point cloud!
-$ python vis_skeleton_pcd.py -pa demo -f 648
+$ python vis_skeleton_pcd.py -pa demo -f 2720 -fw 80
 ```
 
-You should be able to see a open3d viewer with our 3D skeleton and point cloud data:
-<img src="assets/vis_skeleton_pcd.jpg" width=100%>
+You should be able to see a open3d viewer with our 3D skeleton and point cloud data, press 'h' in the viewer to see how to control the viewpoint:
+<img src="assets/vis_skeleton_pcd.jpg" width=80%>
 
 Note that at time we developed, we use `open3d == 0.7.0`. The visualization code is not compatible with the newer version of open3d.
 
