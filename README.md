@@ -48,7 +48,7 @@ $ python vis_2d_pose_depth.py -pa demo
 ```
 
 You should be able to find a created `demo/vis/` directory with `*_vis.jpg` that render to a movie strip like this:
-<img src="assets/vis_2d_pose_depth.gif" width=100%>
+<img src="assets/vis_2d_pose_depth.gif" width=80%>
 
 ### (3) 3D skeleton & point cloud
 ```bash
@@ -60,7 +60,7 @@ $ python vis_skeleton_pcd.py -pa demo -f 2720 -fw 80
 ```
 
 You should be able to see a open3d viewer with our 3D skeleton and point cloud data, press 'h' in the viewer to see how to control the viewpoint:
-<img src="assets/vis_skeleton_pcd.jpg" width=80%>
+<img src="assets/vis_skeleton_pcd.gif" width=100%>
 
 Note that at time we developed, we use `open3d == 0.7.0`. The visualization code is not compatible with the newer version of open3d.
 
