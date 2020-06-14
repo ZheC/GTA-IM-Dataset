@@ -15,11 +15,9 @@
 This repository maintains our GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collected a set of full-HD RGB-D sequence with clean human motion annotations.
 
 **Table of contents**<br>
-1. [Customized operators for deformable kernels, along with its variants.](#1-customized-operators)<br>
-2. [Instructions to use our operators.](#2-quickstart)<br>
-3. [Results on ImageNet & COCO benchmarks, with pretrained models for
-reproduction.](#3-results--pretrained-models)<br>
-5. [Training and evaluation code.](#4-training--evaluation-code)<br>
+1. [A demo for playing with our dataset.](#demo)<br>
+2. [Instructions to request our full dataset.](#requesting-dataset)<br>
+3. [Documentation on our dataset structure and contents.](#dataset-contents)<br>
 
 
 ## Demo
@@ -47,9 +45,7 @@ $ python vis_video.py -pa demo -fr 15
 ```
 
 You should be able to find a created `demo/vis/` directory with a `video.mp4`:
-<video width=100% controls>
-  <source src="assets/vis_video.mp4" type="video/mp4">
-</video>
+[![Watch the video](assets/vis_video.jpg)](assets/vis_video.mp4)
 
 ### (2) 2D skeleton & depth map
 ```bash
