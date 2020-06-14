@@ -151,7 +151,7 @@ LIMBS = [
 
 ## Important Note
 
-This dataset is for non-commercial research purpose only. Due to public interest, we decided to reimplement the data generation pipeline from scratch to collect the GTA-IM dataset again. We do not use Facebook resources to reproduce the data. 
+This dataset is for non-commercial research purpose only. Due to public interest, I decided to reimplement the data generation pipeline from scratch to collect the GTA-IM dataset again. I do not use Facebook resources to reproduce the data. 
 
 ## Citation
 
