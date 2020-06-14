@@ -7,12 +7,12 @@
 </div>
 
 <br>
+This repository maintains our GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collect HD RGB-D image seuqences of 3D human motion from realistic game engine. The dataset has clean 3D human pose and camera pose annoations, and large diversity in human appearances, indoor environments, camera views, and human activities. More information can be found in our paper:
 
-**Long-term Human Motion Prediction with Scene Context**
+**Long-term Human Motion Prediction with Scene Context** [PDF](https://people.eecs.berkeley.edu/~zhecao/hmp/preprint.pdf)
 <br>
 [Zhe Cao](http://people.eecs.berkeley.edu/~zhecao/), [Hang Gao](http://people.eecs.berkeley.edu/~hangg/), [Karttikeya Mangalam](https://karttikeya.github.io/), [Qi-Zhi Cai](https://scholar.google.com/citations?user=oyh-YNwAAAAJ&hl=en), [Minh Vo](https://minhpvo.github.io/), [Jitendra Malik](https://people.eecs.berkeley.edu/~malik/). <br>
 
-This repository maintains our GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collected a set of full-HD RGB-D sequence with clean human motion annotations.
 
 **Table of contents**<br>
 1. [A demo for playing with our dataset.](#demo)<br>
@@ -32,14 +32,6 @@ For your convinience, we provide a fragment of our data in `demo` directory. And
 $ python vis_video.py -h
 usage: vis_video.py [-h] [-pa PATH] [-s SCALE] [-fr FRAME_RATE]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -pa PATH, --path PATH
-  -s SCALE, --scale SCALE
-                        down scale
-  -fr FRAME_RATE, --frame_rate FRAME_RATE
-                        frame_rate
-
 # now visualize demo video!
 $ python vis_video.py -pa demo -fr 15
 ```
@@ -51,10 +43,6 @@ You should be able to find a created `demo/vis/` directory with a `video.mp4`:
 ```bash
 $ python vis_2d_pose_depth.py -h
 usage: vis_2d_pose_depth.py [-h] [-pa PATH]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -pa PATH, --path PATH
 
 # now visualize 2d skeleton and depth map!
 $ python vis_2d_pose_depth.py -pa demo
@@ -68,14 +56,6 @@ You should be able to find a created `demo/vis/` directory with `*_vis.jpg` that
 $ python vis_skeleton_pcd.py -h
 usage: vis_skeleton_pcd.py [-h] [-pa PATH] [-f FRAME] [-fw FUSION_WINDOW]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -pa PATH, --path PATH
-  -f FRAME, --frame FRAME
-                        frame to visualize
-  -fw FUSION_WINDOW, --fusion-window FUSION_WINDOW
-                        timesteps of RGB frames for fusing
-
 # now visualize demo 3d skeleton and point cloud!
 $ python vis_skeleton_pcd.py -pa demo -f 648
 ```
@@ -83,7 +63,7 @@ $ python vis_skeleton_pcd.py -pa demo -f 648
 You should be able to see a open3d viewer with our 3D skeleton and point cloud data:
 <img src="assets/vis_skeleton_pcd.jpg" width=100%>
 
-Note that at time we developed, we use `open3d == 0.7.0`. This dependency is required, and the latest version of open3d will not work out of the box.
+Note that at time we developed, we use `open3d == 0.7.0`. The visualization code is not compatible with the newer version of open3d.
 
 ## Requesting Dataset
 
@@ -130,8 +110,10 @@ After you download data from our link and unzip, each sequence folder will conta
 
     ````python
     import numpy as np
-    info = pickle.load(open(data_path+'info_frames.pickle', 'rb'))
-    print(info[0].keys())
+    info_npz = np.load(rec_idx+'info_frames.npz'); 
+    print(info_npz.files)
+    # 2d poses for frame 0
+    print(npz['joints_2d'][0]) 
     ````
 
 
@@ -170,9 +152,7 @@ LIMBS = [
 
 ## Important Note
 
-This dataset is for non-commercial research purpose only. Due to public interest, we decided to reimplement the data generation pipeline from scratch to collect the GTA-IM dataset again. We do not use FB resources to reproduce the data.
-
-We are not able to and will not provide our scripts to create this dataset due to [copyright issues](https://support.rockstargames.com/articles/200153756/Policy-on-posting-copyrighted-Rockstar-Games-material).
+This dataset is for non-commercial research purpose only. Due to public interest, we decided to reimplement the data generation pipeline from scratch to collect the GTA-IM dataset again. We do not use Facebook resources to reproduce the data. We can not provide our scripts to create this dataset due to copyright issues.
 
 ## Citation
 
@@ -182,11 +162,11 @@ If you use it, please consider citing our [work](https://people.eecs.berkeley.ed
 ```latex
 @incollection{caoHMP2020,
   author = {Zhe Cao and
-  Hang Gao and
-  Karttikeya Mangalam and
-  Qizhi Cai and
-  Minh Vo and
-  Jitendra Malik},
+    Hang Gao and
+    Karttikeya Mangalam and
+    Qizhi Cai and
+    Minh Vo and
+    Jitendra Malik},
   title = {Long-term human motion prediction with scene context},
   booktitle = Arxiv,
   year = {2020},
