@@ -27,16 +27,19 @@ Clone this repository, and create local environment: `conda env create -f enviro
 
 For your convinience, we provide a fragment of our data in `demo` directory. And in this section, you will be able to play with different parts of our data using maintained tool scripts.
 
-### (1) RGB video
+### (1) 3D skeleton & point cloud
 ```bash
-$ python vis_video.py -h
-usage: vis_video.py [-h] [-pa PATH] [-s SCALE] [-fr FRAME_RATE]
+$ python vis_skeleton_pcd.py -h
+usage: vis_skeleton_pcd.py [-h] [-pa PATH] [-f FRAME] [-fw FUSION_WINDOW]
 
-# now visualize demo video!
-$ python vis_video.py -pa demo -fr 15
+# now visualize demo 3d skeleton and point cloud!
+$ python vis_skeleton_pcd.py -pa demo -f 2720 -fw 80
 ```
 
-You should be able to find a created `demo/vis/` directory with a `video.mp4`:
+You should be able to see a open3d viewer with our 3D skeleton and point cloud data, press 'h' in the viewer to see how to control the viewpoint:
+<img src="assets/vis_skeleton_pcd.gif" width=100%>
+
+Note that we use `open3d == 0.7.0`, the visualization code is not compatible with the newer version of open3d.
 
 ### (2) 2D skeleton & depth map
 ```bash
@@ -50,19 +53,16 @@ $ python vis_2d_pose_depth.py -pa demo
 You should be able to find a created `demo/vis/` directory with `*_vis.jpg` that render to a movie strip like this:
 <img src="assets/vis_2d_pose_depth.gif" width=80%>
 
-### (3) 3D skeleton & point cloud
+### (3) RGB video
 ```bash
-$ python vis_skeleton_pcd.py -h
-usage: vis_skeleton_pcd.py [-h] [-pa PATH] [-f FRAME] [-fw FUSION_WINDOW]
+$ python vis_video.py -h
+usage: vis_video.py [-h] [-pa PATH] [-s SCALE] [-fr FRAME_RATE]
 
-# now visualize demo 3d skeleton and point cloud!
-$ python vis_skeleton_pcd.py -pa demo -f 2720 -fw 80
+# now visualize demo video!
+$ python vis_video.py -pa demo -fr 15
 ```
 
-You should be able to see a open3d viewer with our 3D skeleton and point cloud data, press 'h' in the viewer to see how to control the viewpoint:
-<img src="assets/vis_skeleton_pcd.gif" width=100%>
-
-Note that at time we developed, we use `open3d == 0.7.0`. The visualization code is not compatible with the newer version of open3d.
+You should be able to find a created `demo/vis/` directory with a `video.mp4`:
 
 ## Requesting Dataset
 
