@@ -1,47 +1,128 @@
-# GTA-IM Dataset
-
-We introduce the GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collected a set of full-HD RGB-D sequence with clean human motion annotations. 
+# <b>GTA-IM Dataset</b> [[Website]](https://people.eecs.berkeley.edu/~zhecao/hmp/)
 
 <div align=center>
-<img src="https://github.com/ZheC/GTA-IM-Dataset/blob/master/gif/demo1.gif" width=32% style="margin-left:4%">
-<img src="https://github.com/ZheC/GTA-IM-Dataset/blob/master/gif/demo2.gif" width=32% style="margin-right:4%">
-<img src="https://github.com/ZheC/GTA-IM-Dataset/blob/master/gif/demo3.gif" width=32% style="margin-right:4%">
+<img src="assets/sample1.gif" width=32%>
+<img src="assets/sample2.gif" width=32%>
+<img src="assets/sample3.gif" width=32%>
 </div>
 
-## Obtain the Dataset
+<br>
+
+**Long-term Human Motion Prediction with Scene Context**
+<br>
+[Zhe Cao](http://people.eecs.berkeley.edu/~zhecao/), [Hang Gao](http://people.eecs.berkeley.edu/~hangg/), [Karttikeya Mangalam](https://karttikeya.github.io/), [Qi-Zhi Cai](https://scholar.google.com/citations?user=oyh-YNwAAAAJ&hl=en), [Minh Vo](https://minhpvo.github.io/), [Jitendra Malik](https://people.eecs.berkeley.edu/~malik/). <br>
+
+This repository maintains our GTA Indoor Motion dataset (GTA-IM) that emphasizes human-scene interactions in the indoor environments. We collected a set of full-HD RGB-D sequence with clean human motion annotations.
+
+**Table of contents**<br>
+1. [Customized operators for deformable kernels, along with its variants.](#1-customized-operators)<br>
+2. [Instructions to use our operators.](#2-quickstart)<br>
+3. [Results on ImageNet & COCO benchmarks, with pretrained models for
+reproduction.](#3-results--pretrained-models)<br>
+5. [Training and evaluation code.](#4-training--evaluation-code)<br>
+
+
+## Demo
+
+### (0) Getting Started
+Clone this repository, and create local environment: `conda env create -f environment.yml`.
+
+For your convinience, we provide a fragment of our data in `demo` directory. And in this section, you will be able to play with different parts of our data using maintained tool scripts.
+
+### (1) RGB video
+```bash
+$ python vis_video.py -h
+usage: vis_video.py [-h] [-pa PATH] [-s SCALE] [-fr FRAME_RATE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -pa PATH, --path PATH
+  -s SCALE, --scale SCALE
+                        down scale
+  -fr FRAME_RATE, --frame_rate FRAME_RATE
+                        frame_rate
+
+# now visualize demo video!
+$ python vis_video.py -pa demo -fr 15
+```
+
+You should be able to find a created `demo/vis/` directory with a `video.mp4`:
+<video width=100% controls>
+  <source src="assets/vis_video.mp4" type="video/mp4">
+</video>
+
+### (2) 2D skeleton & depth map
+```bash
+$ python vis_2d_pose_depth.py -h
+usage: vis_2d_pose_depth.py [-h] [-pa PATH]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -pa PATH, --path PATH
+
+# now visualize 2d skeleton and depth map!
+$ python vis_2d_pose_depth.py -pa demo
+```
+
+You should be able to find a created `demo/vis/` directory with `*_vis.jpg` that render to a movie strip like this:
+<img src="assets/vis_2d_pose_depth.gif" width=100%>
+
+### (3) 3D skeleton & point cloud
+```bash
+$ python vis_skeleton_pcd.py -h
+usage: vis_skeleton_pcd.py [-h] [-pa PATH] [-f FRAME] [-fw FUSION_WINDOW]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -pa PATH, --path PATH
+  -f FRAME, --frame FRAME
+                        frame to visualize
+  -fw FUSION_WINDOW, --fusion-window FUSION_WINDOW
+                        timesteps of RGB frames for fusing
+
+# now visualize demo 3d skeleton and point cloud!
+$ python vis_skeleton_pcd.py -pa demo -f 648
+```
+
+You should be able to see a open3d viewer with our 3D skeleton and point cloud data:
+<img src="assets/vis_skeleton_pcd.jpg" width=100%>
+
+Note that at time we developed, we use `open3d == 0.7.0`. This dependency is required, and the latest version of open3d will not work out of the box.
+
+## Requesting Dataset
 
 To obtain the Dataset, please send an email to [Zhe Cao](https://people.eecs.berkeley.edu/~zhecao/) (with the title "GTA-IM Dataset Download") stating:
 
 - Your name, title and affilation
-
 - Your intended use of the data
-
 - The following statement:
     > With this email we declare that we will use the GTA-IM Dataset for non-commercial research purposes only. We also undertake to purchase a copy of Grand Theft Auto V. We will not redistribute the data in any form except in academic publications where necessary to present examples.
 
 We will promptly reply with the download link.
 
 
-## `GTA-IM-Dataset` Contents
+## Dataset Contents
 
-After the data download and unzip, each sequence folder will contain the following files:
+After you download data from our link and unzip, each sequence folder will contain the following files:
 
-- `images`: 
+- `images`:
+    - color images: `*.jpg`
+    - depth images: `*.jpg`
+    - instance masks: `*_id`.png
 
-    - `color images`: `*.jpg`
-    - `depth images`: `*.jpg`
-    - `instance masks`: `*_id`.png
-
+<br>
 
 - `info_frames.pickle`: a pickle file contains camera information, 3d human poses (98 joints) in the global coordinate, weather condition, the character ID, and so on.
 
     ````python
-    import pickle 
-    info = pickle.load(open(data_path+'info_frames.pickle', 'rb'))
+    import pickle
+    info = pickle.load(open(data_path + 'info_frames.pickle', 'rb'))
     print(info[0].keys())
     ````
 
-- `info_frames.npz`: it contains five arrays. 21 joints out of 98 human joints are extraced to form the minimal skeleton. 
+<br>
+
+- `info_frames.npz`: it contains five arrays. 21 joints out of 98 human joints are extraced to form the minimal skeleton. [Here](gen_npz.py) is how we generate it from raw captures.
 
     - `joints_2d`: 2d human poses on the HD image plane.
     - `joints_3d_cam`: 3d human poses in the current frame's camera coordinate
@@ -49,15 +130,20 @@ After the data download and unzip, each sequence folder will contain the followi
     - `world2cam_trans`: the world to camera transformation matrix for each frame
     - `intrinsics`: camera intrinsics
 
+    <br>
+
     ````python
-    import numpy as np 
+    import numpy as np
     info = pickle.load(open(data_path+'info_frames.pickle', 'rb'))
     print(info[0].keys())
     ````
 
+
+<br>
+
 - `realtimeinfo.pickle`: a backup pickle file which contains all information from the data collection.
 
-### Joint Types
+#### Joint Types
 
 The human skeleton connection and joints index name:
 
@@ -86,35 +172,16 @@ LIMBS = [
 ]
 ```
 
-### Data Visualization
-
-- `vis_skeleton_mesh.py`: visaulize the 3D pose in 3D point cloud
-    - requires open3d == 0.7.0.0, newer version does not work with the 3D skeleton visualization code
-    - usage example: 
-      ```bash
-      python vis_skeleton_mesh.py -pa PATH_TO_DATA/ -f FRAME_INDEX
-      ```
-
-- `vis_2d_pose_depth.py`: visaulize the 2d pose in RGB image together with the depth map. This will create a subfolder `vis` to save the result.
-    - usage example: 
-        ````bash
-		python vis_2dpose.py -pa PATH_TO_DATA/ 
-        ````
-
-- `write_video.py`: create a RGB video from the color images.
-    - usage example: 
-        ````bash
-		python write_video.py -pa PATH_TO_DATA/ -s DOWN_SCALE_RATIO -fr FRAME_RATE
-        ````
-
 ## Important Note
 
 This dataset is for non-commercial research purpose only. Due to public interest, we decided to reimplement the data generation pipeline from scratch to collect the GTA-IM dataset again. We do not use FB resources to reproduce the data.
 
+We are not able to and will not provide our scripts to create this dataset due to [copyright issues](https://support.rockstargames.com/articles/200153756/Policy-on-posting-copyrighted-Rockstar-Games-material).
+
 ## Citation
 
-We believe in open research and we are happy if you find this data useful.   
-If you use it, please cite our [work](https://people.eecs.berkeley.edu/~zhecao/hmp/preprint.pdf).
+We believe in open research and we will be happy if you find this data useful.
+If you use it, please consider citing our [work](https://people.eecs.berkeley.edu/~zhecao/hmp/preprint.pdf).
 
 ```latex
 @incollection{caoHMP2020,

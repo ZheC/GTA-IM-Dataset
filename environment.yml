@@ -1,0 +1,13 @@
+name: gta-im
+channels:
+  - conda-forge
+  - open3d-admin
+dependencies:
+  - python=3.6
+  - tqdm
+  - numpy
+  - numba
+  - pillow
+  - matplotlib
+  - opencv
+  - open3d=0.7
