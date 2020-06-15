@@ -177,4 +177,4 @@ If you use it, please consider citing our [work](https://people.eecs.berkeley.ed
 Our data collection pipeline was built upon [this plugin](https://github.com/philkr/gamehook_gtav) and [this tool](https://github.com/fabbrimatteo/JTA-Mods).
 
 ## LICENSE
-Our project is released under [BSD 2-Clause License](https://github.com/ZheC/GTA-IM-Dataset/tree/master/LICENSE).
+Our project is released under [CC-BY-NC 4.0](https://github.com/ZheC/GTA-IM-Dataset/tree/master/LICENSE).
