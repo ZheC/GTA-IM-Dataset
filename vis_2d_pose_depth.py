@@ -34,7 +34,10 @@ def single_vis(args):
             # depth map
             infot = info[idx]
             cam_near_clip = infot['cam_near_clip']
-            cam_far_clip = infot['cam_far_clip']
+            if 'cam_far_clip' in infot.keys():
+                cam_far_clip = infot['cam_far_clip']
+            else:
+                cam_far_clip = 800.    
             fname = os.path.join(args.path, '{:05d}'.format(idx) + '.png')
             depthmap = read_depthmap(fname, cam_near_clip, cam_far_clip)
 
