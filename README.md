@@ -8,7 +8,7 @@
 
 <br>
 
-**Long-term Human Motion Prediction with Scene Context** [[ECCV 2020 (Oral)]](https://arxiv.org/pdf/2007.03672.pdf)
+**Long-term Human Motion Prediction with Scene Context, ECCV 2020 (Oral)** [PDF](https://arxiv.org/pdf/2007.03672.pdf)
 <br>
 [Zhe Cao](http://people.eecs.berkeley.edu/~zhecao/), [Hang Gao](http://people.eecs.berkeley.edu/~hangg/), [Karttikeya Mangalam](https://karttikeya.github.io/), [Qi-Zhi Cai](https://scholar.google.com/citations?user=oyh-YNwAAAAJ&hl=en), [Minh Vo](https://minhpvo.github.io/), [Jitendra Malik](https://people.eecs.berkeley.edu/~malik/). <br>
 
